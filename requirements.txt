@@ -1,0 +1,6 @@
+flask
+flask-socketio
+playwright
+fake-useragent
+psutil
+eventlet
