@@ -140,7 +140,7 @@ def interpret_command(command):
     """Uses LLM to parse natural language into structured actions."""
     try:
         response = client.chat.completions.create(
-            model="gpt-4.1-mini",
+            model="gemini-2.5-flash",
             messages=[
                 {"role": "system", "content": "You are an automation architect. Translate the user's command into a JSON list of actions. Supported actions: {'type': 'navigate', 'url': '...'}, {'type': 'scroll', 'direction': 'down/up'}, {'type': 'wait', 'seconds': 5}. Output ONLY the JSON list."},
                 {"role": "user", "content": command}
