@@ -12,7 +12,13 @@ from fake_useragent import UserAgent
 from openai import OpenAI
 
 # Initialize OpenAI client (requires OPENAI_API_KEY environment variable)
-client = OpenAI()
+ai_enabled = False
+try:
+    client = OpenAI()
+    ai_enabled = True
+except Exception as e:
+    print(f"AI Initialization Failed: {e}. AI features will be disabled.")
+    client = None
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'sovereign_v5_secret'
@@ -138,6 +144,10 @@ DASHBOARD_HTML = """
 # --- AI Interpreter ---
 def interpret_command(command):
     """Uses LLM to parse natural language into structured actions."""
+    global ai_enabled
+    if not ai_enabled:
+        print("AI is disabled. Cannot interpret command.")
+        return []
     try:
         response = client.chat.completions.create(
             model="gemini-2.5-flash",
