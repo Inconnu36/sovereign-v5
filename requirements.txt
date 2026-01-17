@@ -4,3 +4,4 @@ playwright
 fake-useragent
 psutil
 eventlet
+openai
